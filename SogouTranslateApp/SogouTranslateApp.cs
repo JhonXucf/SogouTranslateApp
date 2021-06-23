@@ -29,6 +29,18 @@ namespace SogouTranslateApp
                 Pid = pid;
                 Key = key;
             }
+            var languages = iniHelper.GetSections("Language").ToList();
+
+            if (languages != null)
+            {
+                this.cbx_From.DisplayMember = "Value";
+                this.cbx_From.ValueMember = "Key";
+                this.cbx_From.DataSource = languages;
+
+                this.cbx_To.DisplayMember = "Value";
+                this.cbx_To.ValueMember = "Key";
+                this.cbx_To.DataSource = languages;
+            } 
         }
 
         private void ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -53,7 +65,7 @@ namespace SogouTranslateApp
         {
             if (this.cbx_From.Text.Equals(this.cbx_To.Text))
             {
-                MessageBox.Show("转换语言不能一样");
+                MessageBox.Show("转换语言不能相同!");
                 return;
             }
             Dictionary<string, string> paras = getPublicParams();

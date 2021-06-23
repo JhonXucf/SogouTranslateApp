@@ -455,6 +455,15 @@ namespace SogouTranslateApp.Helper
 			return m_Sections.ContainsKey(SectionName);
 		}
 
+		public Dictionary<string, string> GetSection(string SectionName)
+		{
+            if (IsSectionExists(SectionName))
+            {
+				return m_Sections[SectionName];
+            }
+			return null;
+		}
+
 		// *** Check if the key exists ***
 		public bool IsKeyExists(string SectionName, string Key)
 		{

@@ -101,7 +101,7 @@ namespace SogouTranslateApp
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Settings";
-            this.Text = "Settings";
+            this.Text = "设置Sogou访问Pid和Key";
             this.ResumeLayout(false);
             this.PerformLayout();
 

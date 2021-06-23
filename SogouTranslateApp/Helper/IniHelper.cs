@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SogouTranslateApp.Helper
@@ -109,5 +110,9 @@ namespace SogouTranslateApp.Helper
 
             return m_IniFile.ReadValue(GameIni_GameIni_NAME, szName, szDefaultVal);
         }
-    };
+        public Dictionary<string, string> GetSections(string SectionName)
+        {
+            return m_IniFile.GetSection(SectionName);
+        }
+    }
 }

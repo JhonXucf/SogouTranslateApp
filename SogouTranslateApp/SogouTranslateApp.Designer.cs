@@ -60,7 +60,7 @@ namespace SogouTranslateApp
             this.cbx_To.Items.AddRange(new object[] {
             "zh-CHS",
             "en"});
-            this.cbx_To.Location = new System.Drawing.Point(203, 14);
+            this.cbx_To.Location = new System.Drawing.Point(193, 14);
             this.cbx_To.Name = "cbx_To";
             this.cbx_To.Size = new System.Drawing.Size(70, 25);
             this.cbx_To.TabIndex = 13;
@@ -68,11 +68,11 @@ namespace SogouTranslateApp
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(172, 18);
+            this.label2.Location = new System.Drawing.Point(160, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(20, 17);
             this.label2.TabIndex = 12;
-            this.label2.Text = "to";
+            this.label2.Text = "转";
             // 
             // cbx_From
             // 
@@ -81,7 +81,7 @@ namespace SogouTranslateApp
             this.cbx_From.Items.AddRange(new object[] {
             "zh-CHS",
             "en"});
-            this.cbx_From.Location = new System.Drawing.Point(91, 14);
+            this.cbx_From.Location = new System.Drawing.Point(77, 14);
             this.cbx_From.Name = "cbx_From";
             this.cbx_From.Size = new System.Drawing.Size(70, 25);
             this.cbx_From.TabIndex = 11;
@@ -91,13 +91,13 @@ namespace SogouTranslateApp
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(44, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 17);
+            this.label1.Size = new System.Drawing.Size(20, 17);
             this.label1.TabIndex = 10;
-            this.label1.Text = "from";
+            this.label1.Text = "从";
             // 
             // btn_Translate
             // 
-            this.btn_Translate.Location = new System.Drawing.Point(279, 10);
+            this.btn_Translate.Location = new System.Drawing.Point(276, 10);
             this.btn_Translate.Name = "btn_Translate";
             this.btn_Translate.Size = new System.Drawing.Size(97, 32);
             this.btn_Translate.TabIndex = 9;
