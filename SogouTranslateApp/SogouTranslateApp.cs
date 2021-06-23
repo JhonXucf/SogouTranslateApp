@@ -84,7 +84,22 @@ namespace SogouTranslateApp
             request.AddParameter("application/x-www-form-urlencoded", content, ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
+
+            var result = JsonUtils.JsonToObject<TranslateResult>(response.Content);
+            if (result != null)
+            {
+                this.rtb_TranslatedText.Text = result.translation;
+                return;
+            }
             this.rtb_TranslatedText.Text = JsonUtils.ConvertJsonString(response.Content);
+        }
+        class TranslateResult
+        {
+            public string zly { get; set; }
+            public string query { get; set; }
+            public string translation { get; set; }
+            public string errorCode { get; set; }
+            public string detect { get; set; }
         }
         /// <summary>
         /// 公共参数组装
