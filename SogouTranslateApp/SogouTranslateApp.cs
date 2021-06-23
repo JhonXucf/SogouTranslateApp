@@ -15,11 +15,38 @@ namespace SogouTranslateApp
 {
     public partial class SogouTranslateApp : Form
     {
-        private readonly string Pid = "7adbba1e985379146ea351cfca9ab3a0";
-        private readonly string Key = "fa31b71f409bb871b6721d1caf2e9500";
+        private string Pid = "7adbba1e985379146ea351cfca9ab3a0";
+        private string Key = "fa31b71f409bb871b6721d1caf2e9500";
         public SogouTranslateApp()
         {
             InitializeComponent();
+            this.toolStripMenuItem1.Click += ToolStripMenuItem1_Click;
+            IniHelper iniHelper = new IniHelper();
+            string pid = iniHelper.GetString("Pid", "");
+            string key = iniHelper.GetString("Key", "");
+            if (!string.IsNullOrWhiteSpace(pid))
+            {
+                Pid = pid;
+                Key = key;
+            }
+        }
+
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Settings settings = new Settings();
+            settings.StartPosition = FormStartPosition.CenterParent;
+            DialogResult result = settings.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                IniHelper iniHelper = new IniHelper();
+                string pid = iniHelper.GetString("Pid", "");
+                string key = iniHelper.GetString("Key", "");
+                if (!string.IsNullOrWhiteSpace(pid))
+                {
+                    Pid = pid;
+                    Key = key;
+                }
+            }
         }
 
         private void btn_Translate_Click(object sender, EventArgs e)
@@ -59,7 +86,7 @@ namespace SogouTranslateApp
             paras.Add("pid", Pid);
             string q = this.rtb_QueryText.Text;
             paras.Add("q", q);
-            string salt = getNowTimeStamp();
+            string salt = "1508404016012";//getNowTimeStamp();
             string sign = GenerateMD5(Pid + q + salt + Key);
             paras.Add("sign", sign);
             paras.Add("salt", salt);
