@@ -17,6 +17,7 @@ namespace SogouTranslateApp
     {
         private string Pid = "7adbba1e985379146ea351cfca9ab3a0";
         private string Key = "fa31b71f409bb871b6721d1caf2e9500";
+        private readonly string Url = "http://fanyi.sogou.com/reventondc/api/sogouTranslate";
         public SogouTranslateApp()
         {
             InitializeComponent();
@@ -29,18 +30,18 @@ namespace SogouTranslateApp
                 Pid = pid;
                 Key = key;
             }
-            var languages = iniHelper.GetSections("Language").ToList();
+            var languages = iniHelper.GetSections("Language");
 
             if (languages != null)
             {
                 this.cbx_From.DisplayMember = "Value";
                 this.cbx_From.ValueMember = "Key";
-                this.cbx_From.DataSource = languages;
+                this.cbx_From.DataSource = languages.ToList();
 
                 this.cbx_To.DisplayMember = "Value";
                 this.cbx_To.ValueMember = "Key";
-                this.cbx_To.DataSource = languages;
-            } 
+                this.cbx_To.DataSource = languages.ToList();
+            }
         }
 
         private void ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -74,7 +75,7 @@ namespace SogouTranslateApp
             headers.Add("accept", "application/json");
             headers.Add("content-type", "application/x-www-form-urlencoded");
 
-            var client = new RestClient("http://fanyi.sogou.com/reventondc/api/sogouTranslate");
+            var client = new RestClient(Url);
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("accept", "application/json");
@@ -93,26 +94,17 @@ namespace SogouTranslateApp
         {
             Dictionary<string, string> paras = new Dictionary<string, string>();
 
-            paras.Add("from", this.cbx_From.Text);
-            paras.Add("to", this.cbx_To.Text);
+            paras.Add("from", this.cbx_From.SelectedValue.ToString());
+            paras.Add("to", this.cbx_To.SelectedValue.ToString());
             paras.Add("pid", Pid);
             string q = this.rtb_QueryText.Text;
             paras.Add("q", q);
-            string salt = "1508404016012";//getNowTimeStamp();
+            string salt = "1508404016012";
             string sign = GenerateMD5(Pid + q + salt + Key);
             paras.Add("sign", sign);
             paras.Add("salt", salt);
 
             return paras;
-        }
-        /// <summary>
-        /// 获取时间戳
-        /// </summary>
-        /// <returns></returns>
-        public static String getNowTimeStamp()
-        {
-            String nowTimeStamp = ((long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds / 1000).ToString();
-            return nowTimeStamp;
         }
         /// <summary>
         /// key=value&的形式拼接
